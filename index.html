@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>יום אהבה שמח!</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #ffe3e3;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+        }
+
+        .card {
+            text-align: center;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            max-width: 80%;
+            animation: fadeIn 2s ease-in;
+        }
+
+        .heart {
+            color: #ff4d4d;
+            font-size: 80px;
+            animation: pulse 1.5s infinite;
+        }
+
+        h1 { color: #ff4d4d; margin-top: 10px; }
+        p { color: #555; line-height: 1.6; font-size: 1.1em; }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <div class="heart">❤</div>
+        <h1>יום אהבה שמח!</h1>
+        <p>כאן את יכולה לכתוב את הברכה האישית שלך.<br>
+           למשל: "תודה על כל רגע איתך, אוהבת המון!"</p>
+    </div>
+
+</body>
+</html>
