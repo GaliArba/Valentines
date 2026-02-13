@@ -21,7 +21,6 @@
             min-height: 100vh;
             background-image: radial-gradient(#ffb6c1 1.5px, transparent 1.5px);
             background-size: 25px 25px;
-            overflow-x: hidden;
         }
 
         h1 {
@@ -45,7 +44,6 @@
             width: 100%;
             height: 100px;
             perspective: 1000px;
-            cursor: pointer;
         }
 
         .flip-card-inner {
@@ -93,30 +91,51 @@
             font-weight: normal;
         }
 
-        /* עיצוב מיוחד לכרטיס התמונה - כדי שתיראה מושלם */
         .back-image-container {
             padding: 0 !important;
             overflow: hidden;
-            background-color: white;
         }
         
         .back-image-container img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* גורם לתמונה למלא את הכרטיס בלי להתעוות */
-            display: block;
+            object-fit: cover;
+            cursor: zoom-in;
         }
 
-        .disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
+        /* עיצוב הפופ-אפ לתמונה גדולה */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            justify-content: center;
+            align-items: center;
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.03); }
-            100% { transform: scale(1); }
+        .modal-content {
+            max-width: 90%;
+            max-height: 80%;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255,255,255,0.2);
         }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .disabled { opacity: 0.6; cursor: not-allowed; }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.03); } 100% { transform: scale(1); } }
     </style>
 </head>
 <body>
@@ -128,29 +147,29 @@
         <div class="flip-card" onclick="flip(this)">
             <div class="flip-card-inner">
                 <div class="front">רעבה? 🍕</div>
-                <div class="back">מזל שהזמנתי לנו מקום במסעדה שאת הכי אוהבת ב-20:00!</div>
+                <div class="back">חפשי QR במטבח </div>
             </div>
         </div>
 
         <div class="flip-card" onclick="flip(this)">
             <div class="flip-card-inner">
                 <div class="front">מרגישה שובבה? 😈</div>
-                <div class="back">חכי שתראי מה מחכה לך בתוך הקופסה הקטנה שעל השידה...</div>
+                <div class="back">קדימה מוחבא אפיקומן בחדר</div>
             </div>
         </div>
 
         <div class="flip-card" onclick="flip(this)">
             <div class="flip-card-inner">
                 <div class="front">ספורט? 🏃‍♀️</div>
-                <div class="back">מה דעתך על שיעור פילאטיס זוגי או טיול קצר בשקיעה?</div>
+                <div class="back">מה המקום שדיסני הכי אהבה לחרבן בו?</div>
             </div>
         </div>
 
-        <div class="flip-card" onclick="flip(this)">
+        <div class="flip-card" id="photoCard" onclick="flip(this)">
             <div class="flip-card-inner">
                 <div class="front">זיכרון קטן 📸</div>
                 <div class="back back-image-container">
-                    <img src="main-photo.jpg" alt="הפתעה">
+                    <img src="my-photo.jpg" alt="הפתעה" onclick="openModal(event)">
                 </div>
             </div>
         </div>
@@ -164,11 +183,26 @@
 
     </div>
 
+    <div id="imageModal" class="modal" onclick="closeModal()">
+        <span class="close-modal">&times;</span>
+        <img class="modal-content" src="my-photo.jpg">
+    </div>
+
     <script>
         function flip(card) {
             if (!card.classList.contains('disabled')) {
                 card.classList.toggle('flipped');
             }
+        }
+
+        function openModal(event) {
+            // מונע מהכרטיס להיסגר כשלוחצים על התמונה להגדלה
+            event.stopPropagation(); 
+            document.getElementById("imageModal").style.display = "flex";
+        }
+
+        function closeModal() {
+            document.getElementById("imageModal").style.display = "none";
         }
     </script>
 
