@@ -3,59 +3,156 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>יום אהבה שמח!</title>
+    <title>יום אהבה שמח לקשת!</title>
     <style>
+        :root {
+            --primary-color: #ff4d6d;
+            --bg-color: #fff0f3;
+        }
+
         body {
             margin: 0;
-            padding: 0;
+            padding: 20px 0;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            height: 100vh;
-            background-color: #ffe3e3;
+            background-color: var(--bg-color);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            overflow: hidden;
+            min-height: 100vh;
         }
 
-        .card {
+        h1 {
+            color: var(--primary-color);
             text-align: center;
-            background: white;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            max-width: 80%;
-            animation: fadeIn 2s ease-in;
+            margin-bottom: 30px;
+            font-size: 1.8rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
         }
 
-        .heart {
-            color: #ff4d4d;
-            font-size: 80px;
-            animation: pulse 1.5s infinite;
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 90%;
+            max-width: 400px;
         }
 
-        h1 { color: #ff4d4d; margin-top: 10px; }
-        p { color: #555; line-height: 1.6; font-size: 1.1em; }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.15); }
-            100% { transform: scale(1); }
+        /* עיצוב הכרטיס המתהפך */
+        .flip-card {
+            background-color: transparent;
+            width: 100%;
+            height: 100px;
+            perspective: 1000px;
+            cursor: pointer;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 15px;
+        }
+
+        /* הפעולה של ההיפוך */
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .front, .back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 15px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .front {
+            background-color: white;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .back {
+            background-color: var(--primary-color);
+            color: white;
+            transform: rotateY(180deg);
+            font-size: 1rem;
+            font-weight: normal;
+        }
+
+        .disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .heart-icon {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
         }
     </style>
 </head>
 <body>
 
-    <div class="card">
-        <div class="heart">❤</div>
-        <h1>יום אהבה שמח!</h1>
-        <p>כאן את יכולה לכתוב את הברכה האישית שלך.<br>
-           למשל: "תודה על כל רגע איתך, אוהבת המון!"</p>
+    <h1>לקשת היקרה יום אהבה שמח! ❤️</h1>
+
+    <div class="container">
+        
+        <div class="flip-card" onclick="flip(this)">
+            <div class="flip-card-inner">
+                <div class="front">רעבה? 🍕</div>
+                <div class="back">מזל שהזמנתי לנו מקום במסעדה שאת הכי אוהבת ב-20:00!</div>
+            </div>
+        </div>
+
+        <div class="flip-card" onclick="flip(this)">
+            <div class="flip-card-inner">
+                <div class="front">מרגישה שובבה? 😈</div>
+                <div class="back">חכי שתראי מה מחכה לך בתוך הקופסה הקטנה שעל השידה...</div>
+            </div>
+        </div>
+
+        <div class="flip-card" onclick="flip(this)">
+            <div class="flip-card-inner">
+                <div class="front">ספורט? 🏃‍♀️</div>
+                <div class="back">מה דעתך על שיעור פילאטיס זוגי או טיול קצר בשקיעה?</div>
+            </div>
+        </div>
+
+        <div class="flip-card disabled">
+            <div class="flip-card-inner">
+                <div class="front">בקרוב... ✨</div>
+                <div class="back">הפתעה בדרך!</div>
+            </div>
+        </div>
+
+        <div class="flip-card disabled">
+            <div class="flip-card-inner">
+                <div class="front">משהו נוסף? 🎁</div>
+                <div class="back">עוד קצת סבלנות...</div>
+            </div>
+        </div>
+
     </div>
+
+    <script>
+        function flip(card) {
+            if (!card.classList.contains('disabled')) {
+                card.classList.toggle('flipped');
+            }
+        }
+    </script>
 
 </body>
 </html>
