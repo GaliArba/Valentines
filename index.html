@@ -19,46 +19,31 @@
             background-color: var(--bg-color);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             min-height: 100vh;
-            /* הוספת אנימציית רקע */
-            background-image: radial-gradient(#ffb6c1 2px, transparent 2px);
-            background-size: 32px 32px;
-            animation: moveBackground 20s linear infinite;
+            background-image: radial-gradient(#ffb6c1 1.5px, transparent 1.5px);
+            background-size: 25px 25px;
             overflow-x: hidden;
         }
 
         h1 {
             color: var(--primary-color);
             text-align: center;
-            margin-bottom: 20px;
-            font-size: 1.8rem;
-            text-shadow: 2px 2px 4px rgba(255, 77, 109, 0.2);
-            animation: pulse 2s infinite ease-in-out;
-        }
-
-        /* דוגמה לתמונה ראשית מעוגלת */
-        .main-photo {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid var(--primary-color);
-            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
             margin-bottom: 30px;
+            font-size: 1.8rem;
+            animation: pulse 2s infinite ease-in-out;
         }
 
         .container {
             display: flex;
             flex-direction: column;
-            gap: 25px;
+            gap: 20px;
             width: 90%;
             max-width: 400px;
         }
 
-        /* עיצוב הכרטיס המתהפך */
         .flip-card {
             background-color: transparent;
             width: 100%;
-            height: 120px; /* גובה מוגדל קצת לתמונות */
+            height: 100px;
             perspective: 1000px;
             cursor: pointer;
         }
@@ -68,15 +53,14 @@
             width: 100%;
             height: 100%;
             text-align: center;
-            transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1.1); /* אנימציה קפיצית יותר */
+            transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
             transform-style: preserve-3d;
-            box-shadow: 0 10px 20px rgba(255, 77, 109, 0.15);
-            border-radius: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border-radius: 15px;
         }
 
-        /* הפעולה של ההיפוך */
         .flip-card.flipped .flip-card-inner {
-            transform: rotateY(180deg) scale(1.05); /* קפיצה קטנה בהיפוך */
+            transform: rotateY(180deg);
         }
 
         .front, .back {
@@ -88,99 +72,93 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 20px;
+            border-radius: 15px;
             font-size: 1.2rem;
             font-weight: bold;
-            padding: 15px;
+            padding: 10px;
             box-sizing: border-box;
-            overflow: hidden; /* שלא יברח החוצה */
         }
 
         .front {
-            background: linear-gradient(145deg, #ffffff, #ffe6ea);
+            background-color: white;
             color: var(--primary-color);
-            border: 3px solid var(--primary-color);
+            border: 2px solid var(--primary-color);
         }
 
         .back {
-            background: linear-gradient(145deg, var(--primary-color), #ff2a50);
+            background-color: var(--primary-color);
             color: white;
             transform: rotateY(180deg);
             font-size: 1.1rem;
             font-weight: normal;
         }
-        
-        /* עיצוב מיוחד לכרטיס שהצד האחורי שלו הוא תמונה */
-        .back-image {
-            padding: 0;
-            background: none;
-            border: 3px solid var(--primary-color);
+
+        /* עיצוב מיוחד לכרטיס התמונה - כדי שתיראה מושלם */
+        .back-image-container {
+            padding: 0 !important;
+            overflow: hidden;
+            background-color: white;
         }
-        .back-image img {
+        
+        .back-image-container img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            border-radius: 17px;
+            object-fit: cover; /* גורם לתמונה למלא את הכרטיס בלי להתעוות */
+            display: block;
         }
 
         .disabled {
-            opacity: 0.5;
-            filter: grayscale(0.5);
+            opacity: 0.6;
             cursor: not-allowed;
         }
 
-        /* אנימציות */
         @keyframes pulse {
             0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+            50% { transform: scale(1.03); }
             100% { transform: scale(1); }
-        }
-
-        @keyframes moveBackground {
-            from { background-position: 0 0; }
-            to { background-position: 0 -100px; }
         }
     </style>
 </head>
 <body>
 
     <h1>לקשת היקרה יום אהבה שמח! ❤️</h1>
-    
+
     <div class="container">
         
         <div class="flip-card" onclick="flip(this)">
             <div class="flip-card-inner">
                 <div class="front">רעבה? 🍕</div>
-                <div class="back">הזמנתי מקום במסעדה שאת אוהבת!</div>
+                <div class="back">מזל שהזמנתי לנו מקום במסעדה שאת הכי אוהבת ב-20:00!</div>
             </div>
         </div>
 
         <div class="flip-card" onclick="flip(this)">
             <div class="flip-card-inner">
-                <div class="front">הפתעה מצולמת! 📸</div>
-                <div class="back back-image">
-                    <img src="surprise.jpg" alt="הפתעה">
-                </div>
+                <div class="front">מרגישה שובבה? 😈</div>
+                <div class="back">חכי שתראי מה מחכה לך בתוך הקופסה הקטנה שעל השידה...</div>
             </div>
         </div>
 
         <div class="flip-card" onclick="flip(this)">
             <div class="flip-card-inner">
                 <div class="front">ספורט? 🏃‍♀️</div>
-                <div class="back">שיעור פילאטיס זוגי בשקיעה?</div>
+                <div class="back">מה דעתך על שיעור פילאטיס זוגי או טיול קצר בשקיעה?</div>
+            </div>
+        </div>
+
+        <div class="flip-card" onclick="flip(this)">
+            <div class="flip-card-inner">
+                <div class="front">זיכרון קטן 📸</div>
+                <div class="back back-image-container">
+                    <img src="main-photo.jpg" alt="הפתעה">
+                </div>
             </div>
         </div>
 
         <div class="flip-card disabled">
             <div class="flip-card-inner">
                 <div class="front">בקרוב... ✨</div>
-                <div class="back"></div>
-            </div>
-        </div>
-        <div class="flip-card disabled">
-            <div class="flip-card-inner">
-                <div class="front">משהו נוסף? 🎁</div>
-                <div class="back"></div>
+                <div class="back">עוד קצת סבלנות...</div>
             </div>
         </div>
 
@@ -189,10 +167,6 @@
     <script>
         function flip(card) {
             if (!card.classList.contains('disabled')) {
-                // הוספנו גם רטט קטן לטלפון כשהיא לוחצת
-                if (navigator.vibrate) {
-                    navigator.vibrate(50);
-                }
                 card.classList.toggle('flipped');
             }
         }
